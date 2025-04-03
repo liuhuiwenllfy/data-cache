@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -30,10 +31,44 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     @Autowired
     private CacheUtil<UserInfo> cacheUtil;
 
+    /**
+     * 分页查询
+     * 注意：该分页查询只能支撑万级以下的数据量，如果数据量过大，建议采用其他方式
+     *
+     * @param page 分页参数
+     * @return {@link IPage<UserInfo>}
+     */
     @Override
     public IPage<UserInfo> getByPage(Page<UserInfo> page) {
+        // 从Redis缓存中获取所有用户信息列表
+        List<UserInfo> cachedList = cacheUtil.getAllFromRedis();
+        // 按 username 升序
+        cachedList.sort(Comparator.comparing(UserInfo::getUsername));
+        // 检查缓存是否不为空
+        if (!cachedList.isEmpty()) {
+            // 计算当前页在缓存列表中的起始索引
+            int fromIndex = Math.toIntExact((page.getCurrent() - 1) * page.getSize());
+            // 处理分页溢出情况
+            if (fromIndex > cachedList.size()) {
+                throw new RuntimeException("分页溢出");
+            }
+            // 计算当前页在缓存列表中的结束索引
+            int toIndex = Math.toIntExact(fromIndex + page.getSize());
+            // 处理分页溢出情况
+            toIndex = Math.min(toIndex, cachedList.size());
+
+            // 从缓存列表中截取当前页的数据
+            List<UserInfo> userInfoList = cachedList.subList(fromIndex, toIndex);
+
+            // 将截取的数据设置到分页对象中
+            page.setTotal(cachedList.size());
+            page.setRecords(userInfoList);
+            return page;
+        }
+        // 如果缓存为空，则直接从数据库查询分页数据
         return baseMapper.selectPage(page, null);
     }
+
 
     @Override
     public UserInfo queryById(String id) {

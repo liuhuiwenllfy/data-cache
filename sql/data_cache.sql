@@ -1,0 +1,52 @@
+-- MySQL dump 10.13  Distrib 8.3.0, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: data-cache
+-- ------------------------------------------------------
+-- Server version	8.3.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `user_info`
+--
+
+DROP TABLE IF EXISTS `user_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_info` (
+  `id` varchar(32) NOT NULL COMMENT '主键',
+  `username` varchar(90) DEFAULT NULL COMMENT '用户名称',
+  `nickname` varchar(90) DEFAULT NULL COMMENT '昵称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_info`
+--
+
+LOCK TABLES `user_info` WRITE;
+/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT INTO `user_info` VALUES ('07206a1ddeaecd2283b635932131c020','14','14'),('2a6401613aaec2fa24a2017595e5e07e','6','6'),('2e5886ccd53ed4e70fa95d3dd8fc1ebe','11','11'),('3fe0522aebb9c200b1e06c14481f5cae','4','4'),('5b2375cb4a1c815bc2335e38bb06695c','12','12'),('6bbc760b4cebce716feb778310a7fa11','7','7'),('7378726184055d32a98554ee55a12fea','1','1'),('75494305410b98d8e71e15d2d0f86854','10','10'),('a04713771dcb805e0e2df221db42860c','15','15'),('a4d7a2c48ac479c014b60fbf19247bfb','8','8'),('b7eaffe318650997166ba179dba8744a','3','3'),('c9aa3568665902ef12e3536235c8eae8','9','9'),('d5d3e801d45f958a674cc9674aaa6a34','5','5'),('f1dbb773541f9bc924f9be6f19e9d0f7','13','13'),('fc7153289e047a45ac1f078b1120240a','2','2');
+/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-04-09 14:48:27
